@@ -1,0 +1,65 @@
+#codigo hecho por aquiles millan
+Proceso traductornumerosromanos
+    //vamos a crear un programa capaz de traducir numeros romanos a normales
+    //Definimos las variables
+    Definir numeroromano como Cadena;
+    Definir resultado, i, j como Entero;
+
+    //solicitamos el numero que se desea traducir
+    Escribir "Ingrese numero";
+    Leer numeroromano;
+
+    //le damos valor a las variables
+    resultado ← 0;
+    i ← 1;
+    //creamos un ciclo que se encargue de leer la caadena caracter poor caracter a ver cual coincide
+    Para i ← 1 Hasta Longitud(numeroromano) Con Paso 1 Hacer
+        // le damos un valor a j que servira mas adelante para crear subcadenas
+        j ← i - 1;
+        Si numeroromano[i] = "I" Entonces
+            //las I en romano indican el valor 1, por ende I, II e III pueden interpretarse como sumas de 1
+            resultado ← resultado + 1;
+        FinSi
+        Si numeroromano[i] = "V" Entonces
+            //las I en romano indican el valor 1, por ende I, II e III pueden interpretarse como sumas de 1
+            resultado ← resultado + 5;
+            Si SubCadena(numeroromano, j, i) = "IV" Entonces
+                //hay numeros como el 4 u el 9 que en romano no se representan como IIII o VIIII, si no que se muestran como IV e IX, para solucionar es pproblema y evitar que nos de 6 y 11 cada que aparezcan, restaremos el valor que se añada, en este caso es 2
+                resultado ← resultado - 2;
+            FinSi
+        FinSi
+        #a partir de aqui aplicaremos la misma logica con las distintas letras utilizadas ppara los numeros romanos, mismo metodo de suma y luego restar el valor extra para los numeros como el 4 y el 9
+        Si numeroromano[i] = "X" Entonces    
+            resultado ← resultado + 10;
+            Si SubCadena(numeroromano, j, i) = "IX" Entonces
+                resultado ← resultado - 2;
+            FinSi
+        FinSi
+        Si numeroromano[i] = "L" Entonces    
+            resultado ← resultado + 50;
+            Si SubCadena(numeroromano, j, i) = "XL" Entonces
+                resultado ← resultado - 20;
+            FinSi
+        FinSi
+        Si numeroromano[i] = "C" Entonces    
+            resultado ← resultado + 100;
+            Si SubCadena(numeroromano, j, i) = "XC" Entonces
+                resultado ← resultado - 20;
+            FinSi
+        FinSi
+        Si numeroromano[i] = "D" Entonces    
+            resultado ← resultado + 500;
+            Si SubCadena(numeroromano, j, i) = "CD" Entonces
+                resultado ← resultado - 200;
+            FinSi
+        FinSi
+         Si numeroromano[i] = "M" Entonces    
+            resultado ← resultado + 1000;
+            Si SubCadena(numeroromano, j, i) = "CM" Entonces
+                resultado ← resultado - 200;
+            FinSi
+        FinSi
+    FinPara
+    //mostramos el resultado
+    Escribir resultado;
+FinProceso
